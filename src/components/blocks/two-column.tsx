@@ -3,21 +3,13 @@
 
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity";
-import { Button } from "@/components/ui/button";
-
-type Column = {
-  image?: any;
-  heading?: string;
-  body?: string;
-  cta?: {
-    text?: string;
-    url?: string;
-  };
-};
+import Link from "next/link";
+import { buttonVariants } from "../ui/button";
+import { Column } from "@/types/cms";
 
 type TwoColumnProps = {
-  left: Column;
-  right: Column;
+  left?: Column;
+  right?: Column;
 };
 
 export function TwoColumn({ left, right }: TwoColumnProps) {
@@ -44,10 +36,23 @@ export function TwoColumn({ left, right }: TwoColumnProps) {
         {col.body && (
           <p className="text-sm md:text-base max-w-md">{col.body}</p>
         )}
-        {col.cta?.text && col.cta?.url && (
+        {/* {col.cta?.text && col.cta?.url && (
           <Button asChild variant="secondary">
             <a href={col.cta.url}>{col.cta.text}</a>
           </Button>
+        )} */}
+        {col.cta && (
+          <div className="flex gap-2 flex-wrap justify-center">
+            <Link
+              href={col.cta.href}
+              className={buttonVariants({
+                variant: col.cta.variant ?? "default",
+                size: col.cta.size ?? "default",
+              })}
+            >
+              {col.cta.text}
+            </Link>
+          </div>
         )}
       </div>
     </div>
@@ -56,8 +61,8 @@ export function TwoColumn({ left, right }: TwoColumnProps) {
   return (
     <section className="px-4 py-12">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        {renderColumn(left)}
-        {renderColumn(right)}
+        {left && renderColumn(left)}
+        {right && renderColumn(right)}
       </div>
     </section>
   );

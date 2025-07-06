@@ -4,29 +4,7 @@ import Image from "next/image";
 import { urlForImage } from "@/lib/sanity";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
-
-export type CTA = {
-  text: string;
-  href: string;
-  variant?:
-    | "default"
-    | "link"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | null
-    | undefined;
-  size?: "default" | "icon" | "sm" | "lg" | null | undefined;
-};
-
-export type InfoItemProps = {
-  icon?: any;
-  heading: string;
-  body: string;
-  ctas?: CTA[];
-  index?: number; // for animation delay
-};
+import { InfoItemProps } from "@/types/cms";
 
 export function InfoItem({
   icon,

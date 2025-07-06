@@ -1,6 +1,7 @@
 // lib/sanity.ts
 import { createClient, groq } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
+import { SanityImage } from "@/types/cms";
 
 export type FloorPlan = {
   _id: string;
@@ -12,12 +13,7 @@ export type FloorPlan = {
   bedrooms?: number;
   bathrooms?: number;
   squareFeet?: number;
-  images?: {
-    _key: string;
-    asset: any;
-    alt?: string;
-    url: string;
-  }[];
+  images?: SanityImage[];
   imageUrl?: string | null;
 };
 
@@ -35,7 +31,7 @@ export const client = createClient({
 
 // ✅ Image URL builder
 const builder = imageUrlBuilder({ projectId, dataset });
-export const urlForImage = (source: any) => builder.image(source);
+export const urlForImage = (source: SanityImage) => builder.image(source);
 
 // Get homepage (if still using it directly)
 export async function getHomepageContent() {
@@ -84,7 +80,7 @@ export async function getAllFloorPlans() {
       plans.map((plan) => ({
         ...plan,
         images:
-          plan.images?.map((img: any) =>
+          plan.images?.map((img: SanityImage) =>
             img
               ? { ...img, url: urlForImage(img).width(800).height(600).url() }
               : null
@@ -114,7 +110,7 @@ export async function getFloorPlanBySlug(slug: string) {
         ? {
             ...plan,
             images:
-              plan.images?.map((img: any) =>
+              plan.images?.map((img: SanityImage) =>
                 img
                   ? {
                       ...img,

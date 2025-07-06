@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Drawer from "../ui/drawer";
 import { Button } from "../ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const navItems = [
   { href: "/", label: "Home" },

@@ -9,7 +9,10 @@ type GalleryProps = {
   title?: string;
   images: Array<{
     _key: string;
-    asset: any;
+    asset: {
+      _ref?: string;
+      _type?: string;
+    };
     alt?: string;
   }>;
 };

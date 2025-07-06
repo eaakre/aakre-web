@@ -5,15 +5,10 @@ import { useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { urlForImage } from "@/lib/sanity";
 import { useSwipeable } from "react-swipeable";
-
-type ImageType = {
-  _key: string;
-  asset: any;
-  alt?: string;
-};
+import { SanityImage } from "@/types/cms";
 
 type ImageSliderProps = {
-  images: ImageType[];
+  images: SanityImage[];
   activeIndex: number;
   onClose: () => void;
   onNext: () => void;
@@ -105,7 +100,7 @@ export function ImageSlider({
       <div className="mt-6 flex gap-2 overflow-x-auto max-w-full px-4">
         {images.map((img, index) => (
           <div
-            key={img._key}
+            key={img._key ?? index}
             className={`relative w-20 h-20 cursor-pointer border-2 rounded overflow-hidden ${index === activeIndex ? "border-white" : "border-transparent"}`}
             onClick={() => onSelect(index)}
           >

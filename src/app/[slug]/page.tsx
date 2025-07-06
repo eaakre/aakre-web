@@ -7,6 +7,7 @@ import { TwoColumn } from "@/components/blocks/two-column";
 import { InfoGrid } from "@/components/blocks/infoGrid";
 import { GoogleMap } from "@/components/ui/google-map-embed";
 import { generateSEOMetadata } from "@/lib/seo";
+import { PageContentSlot } from "@/types/cms";
 
 type PageProps = {
   params: {
@@ -41,7 +42,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <section className="space-y-8 pb-10">
       {page.heading && <h1 className="sr-only">{page.heading}</h1>}
-      {page.contentSlots?.map((slot: any, index: number) => {
+      {page.contentSlots?.map((slot: PageContentSlot, index: number) => {
         switch (slot._type) {
           case "hero":
             return <Hero key={index} {...slot} />;

@@ -2,21 +2,20 @@
 
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { buttonVariants } from "../ui/button";
+import { CTA, SanityImage } from "@/types/cms";
 
 type HeroProps = {
-  heading: string;
+  heading?: string;
   subheading?: string;
   backgroundType?: "image" | "video" | "color";
-  backgroundImage?: any;
+  backgroundImage?: SanityImage;
   backgroundVideoUrl?: string;
   backgroundColor?: string;
   fullWidth?: boolean;
-  ctas?: Array<{
-    text: string;
-    url: string;
-  }>;
+  ctas?: CTA[];
   align?: "left" | "center" | "right";
 };
 
@@ -27,7 +26,6 @@ export function Hero({
   backgroundImage,
   backgroundVideoUrl,
   backgroundColor = "#111827", // default bg-gray-900
-  fullWidth = false,
   ctas = [],
   align = "center",
 }: HeroProps) {
@@ -37,13 +35,14 @@ export function Hero({
     right: "items-end text-right",
   }[align];
 
+  console.log({ backgroundImage });
   return (
     <section className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden">
       {/* Backgrounds */}
       {backgroundType === "image" && backgroundImage && (
         <Image
           src={urlForImage(backgroundImage).width(1600).height(900).url()}
-          alt={heading}
+          alt={heading ?? ""}
           fill
           priority
           className="object-cover w-full h-full"
@@ -88,16 +87,19 @@ export function Hero({
           {subheading && (
             <p className="text-lg md:text-xl text-gray-200">{subheading}</p>
           )}
-          {ctas?.length > 0 && (
-            <div className="flex gap-4 mt-4 flex-wrap justify-center">
-              {ctas.map((cta, index) => (
-                <Button
-                  key={index}
-                  asChild
-                  variant={index === 0 ? "default" : "secondary"}
+          {ctas && ctas?.length > 0 && (
+            <div className="flex gap-2 flex-wrap justify-center">
+              {ctas.map((cta, i) => (
+                <Link
+                  key={i}
+                  href={cta.href}
+                  className={buttonVariants({
+                    variant: cta.variant ?? "default",
+                    size: cta.size ?? "default",
+                  })}
                 >
-                  <a href={cta.url}>{cta.text}</a>
-                </Button>
+                  {cta.text}
+                </Link>
               ))}
             </div>
           )}

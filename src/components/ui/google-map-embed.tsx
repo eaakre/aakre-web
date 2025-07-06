@@ -1,12 +1,12 @@
 // components/blocks/google-map.tsx
 
 type GoogleMapProps = {
-  address: string;
+  address?: string;
   height?: number;
 };
 
 export function GoogleMap({ address, height = 400 }: GoogleMapProps) {
-  const encoded = encodeURIComponent(address);
+  const encoded = encodeURIComponent(address ?? "");
   const src = `https://www.google.com/maps?q=${encoded}&output=embed`;
 
   return (

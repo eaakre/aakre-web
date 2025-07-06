@@ -17,7 +17,7 @@ export default function ContactPage() {
 
         {submitted ? (
           <div className="text-green-600 text-center text-lg font-medium">
-            Thank you! We'll be in touch soon.
+            Thank you! We&apos;ll be in touch soon.
           </div>
         ) : (
           <>

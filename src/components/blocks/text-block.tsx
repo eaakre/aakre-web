@@ -2,16 +2,16 @@
 
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity";
+import Link from "next/link";
+import { buttonVariants } from "../ui/button";
+import { CTA, SanityImage } from "@/types/cms";
 
 type TextBlockProps = {
   title?: string;
   text?: string;
-  image?: any;
+  image?: SanityImage;
   imagePosition?: "left" | "right";
-  cta?: {
-    label?: string;
-    url?: string;
-  };
+  ctas?: CTA[];
 };
 
 export function TextBlock({
@@ -19,7 +19,7 @@ export function TextBlock({
   text,
   image,
   imagePosition = "left",
-  cta,
+  ctas,
 }: TextBlockProps) {
   return (
     <section className="max-w-screen-xl mx-auto px-4 py-12 flex flex-col md:flex-row items-center gap-8">
@@ -37,15 +37,21 @@ export function TextBlock({
       <div className="flex-1 text-center md:text-left">
         {title && <h2 className="text-3xl font-semibold mb-4">{title}</h2>}
         {text && <p className="text-lg mb-6 whitespace-pre-line">{text}</p>}
-        {cta?.label && cta?.url && (
-          <a
-            href={cta.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition"
-          >
-            {cta.label}
-          </a>
+        {ctas && ctas?.length > 0 && (
+          <div className="flex gap-2 flex-wrap justify-center">
+            {ctas.map((cta, i) => (
+              <Link
+                key={i}
+                href={cta.href}
+                className={buttonVariants({
+                  variant: cta.variant ?? "default",
+                  size: cta.size ?? "default",
+                })}
+              >
+                {cta.text}
+              </Link>
+            ))}
+          </div>
         )}
       </div>
 

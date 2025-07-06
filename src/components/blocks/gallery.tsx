@@ -7,32 +7,40 @@ import { ImageSlider } from "@/components/ui/image-slider";
 
 type GalleryProps = {
   title?: string;
-  images: Array<{
+  images?: Array<{
     _key: string;
-    asset: any;
+    asset: {
+      _ref?: string;
+      _type?: string;
+    };
     alt?: string;
   }>;
 };
 
 export function Gallery({ title, images }: GalleryProps) {
+  // Early return if no images
+  if (!images || images.length === 0) return null;
+
+  // Now safe to treat as defined
+  const imageList = images;
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const close = () => setActiveIndex(null);
   const next = () =>
-    setActiveIndex((i) => (i === null ? null : (i + 1) % images.length));
+    setActiveIndex((i) => (i === null ? null : (i + 1) % imageList.length));
   const prev = () =>
     setActiveIndex((i) =>
-      i === null ? null : (i - 1 + images.length) % images.length
+      i === null ? null : (i - 1 + imageList.length) % imageList.length
     );
-
-  if (!images?.length) return null;
 
   return (
     <section className="space-y-4 flex flex-col w-full items-center px-4">
       <div className="w-full max-w-screen-xl mx-auto px-4 py-12 space-y-8">
         {title && <h2 className="text-4xl font-bold">{title}</h2>}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {images.map((img, i) => (
+          {imageList.map((img, i) => (
             <div
               key={img._key}
               className="relative aspect-square cursor-pointer"
@@ -51,7 +59,7 @@ export function Gallery({ title, images }: GalleryProps) {
 
       {activeIndex !== null && (
         <ImageSlider
-          images={images}
+          images={imageList}
           activeIndex={activeIndex}
           onClose={close}
           onNext={next}

@@ -1,4 +1,3 @@
-import { getHomepageContent } from "@/lib/sanity";
 import { getPageBySlug } from "@/lib/sanity";
 import { Hero } from "@/components/blocks/hero";
 import { Gallery } from "@/components/blocks/gallery";
@@ -8,18 +7,15 @@ import { TwoColumn } from "@/components/blocks/two-column";
 import { InfoGrid } from "@/components/blocks/infoGrid";
 import { GoogleMap } from "@/components/ui/google-map-embed";
 import { generateSEOMetadata } from "@/lib/seo";
+import { PageContentSlot } from "@/types/cms";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export async function generateMetadata() {
   const page = await getPageBySlug("Homepage");
   if (!page) return notFound();
 
   return generateSEOMetadata({
     title: page.title || "Solid Ground Homes",
-    description: page.description || "Browse  homes and learn more.",
+    description: page.description || "Browse homes and learn more.",
     canonicalUrl: `https://solidgroundhomes.com/`,
     ogImage: page.ogImage
       ? page.ogImageUrl
@@ -34,7 +30,8 @@ export default async function HomePage() {
 
   return (
     <section className="space-y-8">
-      {homepage.contentSlots?.map((slot: any, index: number) => {
+      {homepage.contentSlots?.map((slot: PageContentSlot, index: number) => {
+        console.log({ slot });
         switch (slot._type) {
           case "hero":
             return <Hero key={index} {...slot} />;
