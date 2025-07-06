@@ -9,12 +9,6 @@ import { GoogleMap } from "@/components/ui/google-map-embed";
 import { generateSEOMetadata } from "@/lib/seo";
 import { PageContentSlot } from "@/types/cms";
 
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-
 export async function generateMetadata({
   params,
 }: {
@@ -33,7 +27,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const page = await getPageBySlug(params.slug);
 
   if (!page) return notFound();
