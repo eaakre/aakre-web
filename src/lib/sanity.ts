@@ -45,6 +45,10 @@ export async function getHomepageContent() {
   return await client.fetch(query);
 }
 
+export async function getAllPages() {
+  return await client.fetch(`*[_type == "page"]{ slug }`);
+}
+
 // Get a flexible page by slug (preferred long-term)
 export async function getPageBySlug(slug: string) {
   const query = groq`

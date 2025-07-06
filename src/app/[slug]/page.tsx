@@ -1,4 +1,4 @@
-import { getPageBySlug } from "@/lib/sanity";
+import { getPageBySlug, getAllPages } from "@/lib/sanity";
 import { Hero } from "@/components/blocks/hero";
 import { Gallery } from "@/components/blocks/gallery";
 import { notFound } from "next/navigation";
@@ -8,6 +8,20 @@ import { InfoGrid } from "@/components/blocks/infoGrid";
 import { GoogleMap } from "@/components/ui/google-map-embed";
 import { generateSEOMetadata } from "@/lib/seo";
 import { PageContentSlot } from "@/types/cms";
+
+type Page = {
+  slug?: {
+    current: string;
+  };
+};
+
+export async function generateStaticParams() {
+  const pages: Page[] = await getAllPages(); // <- implement this in your Sanity utils
+
+  return pages.map((page) => ({
+    slug: page.slug?.current,
+  }));
+}
 
 export async function generateMetadata({
   params,
