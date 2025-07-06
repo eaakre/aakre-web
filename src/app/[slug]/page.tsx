@@ -15,7 +15,6 @@ type PageProps = {
   };
 };
 
-// 🧠 SEO: Generate <title>, <meta name="description">, etc.
 export async function generateMetadata({
   params,
 }: {
