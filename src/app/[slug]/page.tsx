@@ -10,15 +10,13 @@ import { generateSEOMetadata } from "@/lib/seo";
 import { PageContentSlot } from "@/types/cms";
 
 type PageProps = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const page = await getPageBySlug(slug);
