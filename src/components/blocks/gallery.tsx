@@ -18,13 +18,11 @@ type GalleryProps = {
 };
 
 export function Gallery({ title, images }: GalleryProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   // Early return if no images
   if (!images || images.length === 0) return null;
-
-  // Now safe to treat as defined
   const imageList = images;
-
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const close = () => setActiveIndex(null);
   const next = () =>
