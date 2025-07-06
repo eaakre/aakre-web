@@ -3,9 +3,7 @@ import { notFound } from "next/navigation";
 import { GalleryProduct } from "@/components/blocks/gallery-product";
 
 type Props = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
 export default async function ProductPage({ params }: Props) {
