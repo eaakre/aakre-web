@@ -35,7 +35,6 @@ export function Hero({
     right: "items-end text-right",
   }[align];
 
-  console.log({ backgroundImage });
   return (
     <section className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden">
       {/* Backgrounds */}

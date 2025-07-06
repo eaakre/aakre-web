@@ -9,10 +9,10 @@ type Props = {
 };
 
 export default async function ProductPage({ params }: Props) {
-  const plan = await getFloorPlanBySlug(params.slug);
+  const { slug } = await params;
+  const plan = await getFloorPlanBySlug(slug);
 
   const attributes = ["description", "squareFeet", "bedrooms", "bathrooms"];
-  console.log({ plan });
   if (!plan) return notFound();
 
   return (

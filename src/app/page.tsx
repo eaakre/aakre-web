@@ -31,7 +31,6 @@ export default async function HomePage() {
   return (
     <section className="space-y-8">
       {homepage.contentSlots?.map((slot: PageContentSlot, index: number) => {
-        console.log({ slot });
         switch (slot._type) {
           case "hero":
             return <Hero key={index} {...slot} />;

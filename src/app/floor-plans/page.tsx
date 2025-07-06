@@ -14,11 +14,12 @@ export const metadata = generateSEOMetadata({
 export default async function FloorPlansPage({
   searchParams,
 }: {
-  searchParams?: { type?: string };
+  searchParams: Promise<{ type?: string }>;
 }) {
+  const { type: typeFilter } = await searchParams;
+
   const allPlans = await getAllFloorPlans();
 
-  const typeFilter = searchParams?.type;
   const filteredPlans = typeFilter
     ? allPlans.filter((plan) => plan.type === typeFilter)
     : allPlans;

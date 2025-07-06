@@ -1,4 +1,4 @@
-import { getPageBySlug, getAllPages } from "@/lib/sanity";
+import { getPageBySlug } from "@/lib/sanity";
 import { Hero } from "@/components/blocks/hero";
 import { Gallery } from "@/components/blocks/gallery";
 import { notFound } from "next/navigation";
@@ -9,40 +9,34 @@ import { GoogleMap } from "@/components/ui/google-map-embed";
 import { generateSEOMetadata } from "@/lib/seo";
 import { PageContentSlot } from "@/types/cms";
 
-type Page = {
-  slug?: {
-    current: string;
+type PageProps = {
+  params: {
+    slug: string;
   };
 };
-
-export async function generateStaticParams() {
-  const pages: Page[] = await getAllPages(); // <- implement this in your Sanity utils
-
-  return pages.map((page) => ({
-    slug: page.slug?.current,
-  }));
-}
 
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }) {
-  const page = await getPageBySlug(params.slug);
+  const { slug } = await params;
+  const page = await getPageBySlug(slug);
   if (!page) return notFound();
 
   return generateSEOMetadata({
     title: `${page.title}`,
     description: page.description || "Browse modular homes and learn more.",
-    canonicalUrl: `https://solidgroundhomes.com/${params.slug}`,
+    canonicalUrl: `https://solidgroundhomes.com/${slug}`,
     ogImage: page.ogImage
       ? page.ogImageUrl
       : "https://solidgroundhomes.com/default-og.jpg",
   });
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const page = await getPageBySlug(params.slug);
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
+  const page = await getPageBySlug(slug);
 
   if (!page) return notFound();
 
