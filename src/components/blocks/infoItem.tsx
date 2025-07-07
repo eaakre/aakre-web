@@ -7,7 +7,7 @@ import { buttonVariants } from "../ui/button";
 import { InfoItemProps } from "@/types/cms";
 
 export function InfoItem({
-  icon,
+  image,
   heading,
   body,
   ctas,
@@ -21,10 +21,10 @@ export function InfoItem({
         animationFillMode: "forwards",
       }}
     >
-      {icon && (
+      {image && (
         <div className="w-12 h-12 mb-4">
           <Image
-            src={urlForImage(icon).width(100).height(100).url()}
+            src={urlForImage(image).width(100).height(100).url()}
             alt={heading}
             width={48}
             height={48}

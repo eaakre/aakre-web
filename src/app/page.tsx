@@ -15,11 +15,13 @@ export async function generateMetadata() {
 
   return generateSEOMetadata({
     title: page.title || "Solid Ground Homes",
-    description: page.description || "Browse homes and learn more.",
-    canonicalUrl: `https://solidgroundhomes.com/`,
+    description:
+      page.description ||
+      "Discover beautiful, customizable homes built with care and precision. Start your journey to a smarter, more efficient home today.",
+    canonicalUrl: `https://solidgroundhomes.vercel.app/`,
     ogImage: page.ogImage
       ? page.ogImageUrl
-      : "https://solidgroundhomes.com/default-og.jpg",
+      : "https://solidgroundhomes.vercel.app/default-og.jpg",
   });
 }
 

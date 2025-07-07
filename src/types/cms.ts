@@ -32,7 +32,7 @@ export type SanityImage = {
 };
 
 export type InfoItemProps = {
-  icon?: SanityImage;
+  image?: SanityImage;
   heading: string;
   body: string;
   ctas?: CTA[];

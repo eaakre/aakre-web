@@ -33,6 +33,7 @@ export function Header() {
         <Button
           className="md:hidden"
           variant="secondary"
+          aria-label="Open Navigation Menu"
           onClick={() => setIsOpen(true)}
         >
           <Menu />
