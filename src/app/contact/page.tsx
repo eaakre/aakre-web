@@ -29,6 +29,7 @@ export default function ContactPage() {
               method="POST"
               onSubmit={() => setSubmitted(true)}
               className="space-y-6"
+id="form"
             >
               <input
                 type="hidden"
