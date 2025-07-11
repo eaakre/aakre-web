@@ -29,12 +29,16 @@ export default function ContactPage() {
               method="POST"
               onSubmit={() => setSubmitted(true)}
               className="space-y-6"
+<<<<<<< HEAD
             > */}
             <form
               action="https://formbold.com/s/3dpB4"
               method="POST"
               encType="multipart/form-data"
               className="space-y-6"
+=======
+id="form"
+>>>>>>> 0160b18246335379b7ad0bcccaca231a7ae8719d
             >
               {/* <input
                 type="hidden"
