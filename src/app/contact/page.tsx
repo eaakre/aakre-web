@@ -24,13 +24,19 @@ export default function ContactPage() {
             <p className="text-muted-foreground mt-2">
               Fill up the form below to send us a message.
             </p>
-            <form
+            {/* <form
               action="https://api.web3forms.com/submit"
               method="POST"
               onSubmit={() => setSubmitted(true)}
               className="space-y-6"
+            > */}
+            <form
+              action="https://formbold.com/s/3dpB4"
+              method="POST"
+              encType="multipart/form-data"
+              className="space-y-6"
             >
-              <input
+              {/* <input
                 type="hidden"
                 name="access_key"
                 value="2e1df742-c5dd-4de8-acd1-a54c457c4419"
@@ -39,8 +45,8 @@ export default function ContactPage() {
                 type="hidden"
                 name="subject"
                 value="New Submission from Web3Forms"
-              />
-              <input type="checkbox" name="botcheck" className="hidden" />
+              /> */}
+              {/* <input type="checkbox" name="botcheck" className="hidden" /> */}
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
@@ -101,7 +107,7 @@ export default function ContactPage() {
                     name="phone"
                     type="tel"
                     placeholder="+1 (555) 1234-567"
-                    required
+                    // required
                   />
                 </div>
               </div>
