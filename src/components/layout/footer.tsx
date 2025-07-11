@@ -5,14 +5,15 @@ export function Footer() {
     <footer className="border-t py-6 px-4 text-sm text-muted-foreground">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
         <p>
-          &copy; {new Date().getFullYear()} Modular Homes. All rights reserved.
+          &copy; {new Date().getFullYear()} Solid Ground Homes. All rights
+          reserved.
         </p>
         <div className="flex gap-4">
           <Link href="/contact" className="hover:underline">
             Contact
           </Link>
-          <Link href="mailto:info@modularhomes.com" className="hover:underline">
-            info@modularhomes.com
+          <Link href="mailto:erikaakre@hotmail.com" className="hover:underline">
+            contact@email.com
           </Link>
         </div>
       </div>
