@@ -24,7 +24,8 @@ export async function generateMetadata({
 
   return generateSEOMetadata({
     title: `${page.title}`,
-    description: page.description || "Browse modular homes and learn more.",
+    description:
+      page.description || "Browse Solid Ground Homes and learn more.",
     canonicalUrl: `https://solidgroundhomes.com/${slug}`,
     ogImage: page.ogImage
       ? page.ogImageUrl
