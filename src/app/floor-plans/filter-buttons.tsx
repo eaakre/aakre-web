@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { track } from "@vercel/analytics";
 
 type Props = {
   types: string[];
@@ -12,6 +13,7 @@ export function FloorPlanFilterButtons({ types, activeType }: Props) {
   const searchParams = useSearchParams();
 
   const handleClick = (type: string | null) => {
+    track("Filter", { type: type });
     const params = new URLSearchParams(searchParams?.toString());
     if (type) {
       params.set("type", type);
