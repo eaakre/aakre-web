@@ -37,7 +37,7 @@ export function FloorPlanFilterButtons({ types, activeType }: Props) {
         <button
           key={type}
           onClick={() => handleClick(type)}
-          className={`px-3 py-1 rounded border ${
+          className={`px-3 py-1 rounded border cursor-pointer ${
             activeType === type ? "bg-primary text-white" : "bg-white"
           }`}
         >
